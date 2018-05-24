@@ -8,7 +8,7 @@ gpio.setwarnings(False)
 #Gardening system
 gpio.setup(21,gpio.IN)#Soil moisture sensor
 gpio.setup(17,gpio.OUT)#Water pump
-gpio.setup(20,gpio.IN)
+gpio.setup(20,gpio.IN)#moisture feedback
 
 
 
@@ -71,8 +71,12 @@ while True:
         
         
         
-    if gpio.input(20) == 1:
-        gpio.setup(17,gpio.LOW)
+    if gpio.input(20) == 1 and gpio.inpt(17) == 1:
+        gpio.setup(17,gpio.LOW)\
+        mail("{} - Pump is turned off due to overflowing of water and its time to change soil moisture".format(datetime.now().strftime("%c")))
+        f = open('home_log.txt','a')
+        f.write("{} - Pump is turned off due to overflowing of water and its time to change soil moisture".format(datetime.now().strftime("%c")))
+        f.close()
 
     
     ############################################# Living Room ######################################################
