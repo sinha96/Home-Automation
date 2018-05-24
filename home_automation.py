@@ -55,14 +55,14 @@ while True:
     
     ############################################# Gardening System ######################################################
     
-    if gpio.input(21) == 1 && gpio.input(17) == 0:
+    if gpio.input(21) == 1 and gpio.input(17) == 0:
         mail("{} - Pump is turned on".format(datetime.now().strftime("%c")))
         gpio.output(17,gpio.HIGH)
         mail("Pump is turned on")
         f = open('home_log.txt','a')
         f.write('{} - Pump is turned on'.format(datetime.now().strftime("%c")))
         f.close()
-    elif gpio.input(21) == 0 && gpio.input(17) == 1:
+    elif gpio.input(21) == 0 and gpio.input(17) == 1:
         mail("{} - Pump is turned off".format(datetime.now().strftime("%c")))
         gpio.output(17,gpio.LOW)
         f = open('home_log.txt','a')
