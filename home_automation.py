@@ -50,29 +50,38 @@ def mail(msg):
     server.sendmail('sinhapriyanshushekhar@gmail.com','sslabs@outlook.com',msg)
     server.quit()
     print('mail sent for {}'.format(msg))
-
+i = 1
+j = 1
 while True:
     
     ############################################# Gardening System ######################################################
     
-    if gpio.input(21) == 1 and gpio.input(17) == 0:
-        mail("{} - Pump is turned on".format(datetime.now().strftime("%c")))
+    if gpio.input(21) == 1:
+        j = 1
         gpio.output(17,gpio.HIGH)
-        mail("Pump is turned on")
-        f = open('home_log.txt','a')
-        f.write('{} - Pump is turned on'.format(datetime.now().strftime("%c")))
-        f.close()
-    elif gpio.input(21) == 0 and gpio.input(17) == 1:
-        mail("{} - Pump is turned off".format(datetime.now().strftime("%c")))
+        if i == 1:
+            mail("{} - Pump is turned on".format(datetime.now().strftime("%c")))
+            mail("Pump is turned on")
+            f = open('home_log.txt','a')
+            f.write('{} - Pump is turned on'.format(datetime.now().strftime("%c")))
+            f.close()
+        i = i + 1
+        
+        
+        
+    if gpio.input(21) == 0:
         gpio.output(17,gpio.LOW)
-        f = open('home_log.txt','a')
-        f.write('{} - Pump is turned off'.format(datetime.now().strftime("%c")))
-        f.close()
+        if j ==1:
+            mail("{} - Pump is turned off".format(datetime.now().strftime("%c")))       
+            f = open('home_log.txt','a')
+            f.write('{} - Pump is turned off'.format(datetime.now().strftime("%c")))
+            f.close()
+            i = 1
         
         
         
     if gpio.input(20) == 1 and gpio.inpt(17) == 1:
-        gpio.setup(17,gpio.LOW)\
+        gpio.setup(17,gpio.LOW)
         mail("{} - Pump is turned off due to overflowing of water and its time to change soil moisture".format(datetime.now().strftime("%c")))
         f = open('home_log.txt','a')
         f.write("{} - Pump is turned off due to overflowing of water and its time to change soil moisture".format(datetime.now().strftime("%c")))
@@ -140,16 +149,3 @@ while True:
         f = open('home_log.txt','a')
         f.write("{} - Kitchen's Lights Turned On".format(datetime.now().strftime("%c")))
         f.close()
-
-    
-    
-
-
-        
-    
-    
-    
-    
-
-
-
