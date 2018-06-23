@@ -67,7 +67,6 @@ void loop()
 {
   temp = analogRead(tempPinLivingRoom);
   temp = temp * 0.48828125;
-  temp = temp - 5 ;
   
   if(temp > 25){
     delay(200);
@@ -80,7 +79,6 @@ void loop()
   }
   temp1 = analogRead(tempPinBedRoom);
   temp1 = temp1 * 0.48828125;
-  temp1 = temp1 - 5 ;
   if(temp1 > 25){
     delay(200);
     analogWrite(44,255);
@@ -92,7 +90,6 @@ void loop()
   }
   temp2 = analogRead(tempPinMasterBedRoom);
   temp2 = temp2 * 0.48828125;
-  temp2 = temp2 - 5 ;
   
   if(temp2 > 25){
     delay(200);
